@@ -1,0 +1,139 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content horizontally */
+  position: relative; /* Allow absolute positioning of children */
+}
+
+.minimap {
+  position: absolute; /* Position it absolutely */
+  top: 0; /* Align to the top */
+  right: 0; /* Align to the right */
+  margin: 10px; /* Optional: Add some margin for spacing */
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.direction-button {
+  width: 30px; /* Button width */
+  height: 30px; /* Button height */
+  font-size: 10px; /* Smaller font size */
+  margin: 1px; /* Remove margin */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Pointer cursor for buttons */
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  background-color: #f0f0f0; /* Background color for buttons */
+  border: 0px solid #000; /* Add border to buttons */
+  box-sizing: border-box; /* Include border in width/height */
+}
+
+/* Special border management for adjacent buttons */
+.controls {
+  margin-top: 10px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-rows: repeat(3, 1fr); /* 3 rows */
+  width: 90px; /* Set a fixed width for the control area */
+  align-items: center; /* Center items vertically within the grid */
+}
+
+
+.room-info {
+  margin-bottom: 15px;
+}
+
+.combat-log {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+.game-layout {
+  display: flex;
+  justify-content: space-between; /* Spreads the content horizontally */
+  align-items: flex-start; /* Aligns the content vertically */
+  padding: 20px;
+}
+
+.output-window {
+  width: 50vw; /* 2/3 of the screen width */
+  height: 30vh; /* Full height of the viewport */
+  border: 1px solid #ccc; /* Optional: Add border for visibility */
+  overflow-y: auto; /* Scrollable if the content overflows */
+  padding: 10px; /* Optional: Add padding inside the output window */
+  box-sizing: border-box; /* Ensure padding does not affect the width */
+}
+
+.minimap-container {
+  flex: 1; /* Minimap will take up less space compared to the output window */
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.combat-ticker{
+  margin:0;
+}
+.combat-log {
+  max-height: 300px; /* Limit the height of the combat log */
+  overflow-y: auto; /* Allow scrolling if content exceeds the height */
+  padding: 10px;
+  border: 1px solid #ccc; /* Optional border */
+  background-color: #f9f9f9; /* Light background */
+}
+
+.player-action {
+  color: blue; /* Color for player actions */
+}
+
+.monster-action {
+  color: red; /* Color for monster actions */
+}
+
+.death-message {
+  color: darkred; /* Color for death messages */
+  font-weight: bold; /* Make it bold for emphasis */
+}
+.combat-window {
+  height: 50vh; /* Adjust the height to fit your layout */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.combat-log-container {
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.combat-ticker {
+  font-size: 11px; /* Adjust the font size here */
+  line-height: 1.2; /* Adjust line height for better readability */
+  margin-bottom: 0px;
+}
+
+.centered{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.player-stats {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.player-stats ul {
+  list-style: none;
+  padding: 0;
+}
+
+.stat {
+  margin: 5px 0;
+}
+
+.stat button {
+  margin-left: 10px;
+}
