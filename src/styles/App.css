@@ -5,15 +5,6 @@
   position: relative; /* Allow absolute positioning of children */
 }
 
-.minimap {
-  position: absolute; /* Position it absolutely */
-  top: 0; /* Align to the top */
-  right: 0; /* Align to the right */
-  margin: 10px; /* Optional: Add some margin for spacing */
-  border: 2px solid black;
-  padding: 10px;
-}
-
 .direction-button {
   width: 30px; /* Button width */
   height: 30px; /* Button height */
@@ -136,4 +127,94 @@
 
 .stat button {
   margin-left: 10px;
+}
+.minimap-container {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  border: 2px solid black;
+}
+
+.minimap-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 20px); /* Adjust to grid size */
+  grid-template-rows: repeat(9, 20px);
+  gap: 2px; /* Space between rooms */
+}
+
+.minimap-room {
+  width: 20px;
+  height: 20px;
+  background-color: white; /* Default for non-existent rooms */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minimap-room.exists {
+  background-color: lightgrey; /* Color for existing rooms */
+}
+
+.minimap-room.player-room {
+  background-color: blue; /* Color for player's current room */
+  opacity: .5;
+}
+
+.exit {
+  width: 3px;
+  height: 3px;
+  background-color: red; /* Exit marker color */
+  position: absolute;
+}
+
+.exit.north {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.exit.south {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.exit.east {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.exit.west {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.exit.northeast {
+  top: 0;
+  right: -5%;
+  transform: translateX(-50%);
+}
+
+.exit.northwest {
+  top: 0;
+  left: 8%;
+  transform: translateX(-50%);
+}
+
+.exit.southeast {
+  bottom: 0;
+  right: -5%;
+  transform: translateX(-50%);
+}
+
+.exit.southwest {
+  bottom: 0;
+  left: 8%;
+  transform: translateX(-50%);
 }

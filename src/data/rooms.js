@@ -3,12 +3,12 @@ const rooms = {
     '0,0,0': { name: 'Town Square', exits:['North', 'South', 'East', 'West', 'Down'], monsters:[], description: 'The hub of bustling Winterholm.  Crown street stretches out before you to the north and the south while Dock street extends to the west and Forest street to the east.  You notice a sewer cap here that has recently been pried open.' },
     //Crown Street
     '0,1,0': { name: 'South Crown St.', exits:['North','West'], monsters:[], description: 'Large homes flank the street on both sides.' },
-    '0,-1,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West', 'Down'], monsters:[], description: 'Shops line the bustling Crown St.  The bank of Winterholm is to the west.' },
-    '0,-2,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West', 'Down'], monsters:[], description: 'Shops line the bustling Crown St.' },
-    '0,-3,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West', 'Down'], monsters:[], description: 'Shops line the bustling Crown St.' },
-    '0,-4,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West', 'Down'], monsters:[], description: 'Shops line the bustling Crown St.' },
-    '0,-5,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West', 'Down'], monsters:[], description: 'Shops line the bustling Crown St.' },
-    '0,-6,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West', 'Down'], monsters:[], description: 'Shops line the bustling Crown St.' },
+    '0,-1,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West'], monsters:[], description: 'Shops line the bustling Crown St.  The bank of Winterholm is to the west.' },
+    '0,-2,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West'], monsters:[], description: 'Shops line the bustling Crown St.' },
+    '0,-3,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West'], monsters:[], description: 'Shops line the bustling Crown St.' },
+    '0,-4,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West'], monsters:[], description: 'Shops line the bustling Crown St.' },
+    '0,-5,0': { name: 'North Crown St.', exits:['North', 'South', 'East', 'West'], monsters:[], description: 'Shops line the bustling Crown St.' },
+    '0,-6,0': { name: 'North Crown St.', exits:['North','South', 'East', 'West'], monsters:[], description: 'Shops line the bustling Crown St.' },
     //Winterholm Shops
     '-1,-1,0':{name: 'Bank of Winterholm Lobby', exits: ['Closed West', 'East'], monsters:[], description: ''},
     

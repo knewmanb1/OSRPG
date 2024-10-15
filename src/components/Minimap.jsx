@@ -5,13 +5,11 @@ import '../styles/App.css'; // Import your CSS file
 
 const Minimap = () => {
     const { playerPos= { x: 0, y: 0, z: 0 } } = useGameContext(); // Get playerPosition from context
-
     const { x: playerX, y: playerY, z: playerZ } = playerPos; // Destructure position
 
     // Define the size of the grid
-    const gridSize = 9; // 10x10 grid
-    const roomSize = 20; // Size of each room square in pixels
-    const halfGridSize = Math.floor(gridSize / 2); // 5
+    const gridSize = 9; // 9x9 grid
+    const halfGridSize = Math.floor(gridSize / 2); // 4
 
     // Determine the bounds of the grid
     const startX = playerX - halfGridSize;
@@ -28,6 +26,7 @@ const Minimap = () => {
                 y: startY + y,
                 room,
                 exists: room !== undefined, // Check if the room exists
+                exits: room?.exits || [] // Add exits for the room
             });
         }
     }
@@ -35,42 +34,16 @@ const Minimap = () => {
     return (
         <div className="minimap-container">
             <h2>Minimap</h2>
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${gridSize}, ${roomSize}px)`,
-                    gridTemplateRows: `repeat(${gridSize}, ${roomSize}px)`,
-                    gap: '2px', // Gap between grid cells
-                }}
-            >
-                {roomsArray.map(({ x, y, room, exists }) => (
+            <div className="minimap-grid">
+                {roomsArray.map(({ x, y, room, exists, exits }) => (
                     <div
                         key={`${x},${y},${playerZ}`} // Use playerZ for key
-                        style={{
-                            width: roomSize,
-                            height: roomSize,
-                            backgroundColor: exists
-                                ? (x === playerX && y === playerY ? 'blue' : 'lightgrey') // Existing room
-                                : 'white', // Non-existent room
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            position: 'relative',
-                            border: 'none',
-                        }}
+                        className={`minimap-room ${exists ? 'exists' : 'non-exists'} ${x === playerX && y === playerY ? 'player-room' : ''}`}
                     >
-                        {x === playerX && y === playerY && (
-                            <div style={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                fontWeight: 'bold',
-                                color: 'white',
-                            }}>
-                                {/* Optional: Character or marker to show player position */}
-                            </div>
-                        )}
+                        {/* Optional: Display room exits */}
+                        {exists && exits.map((exit, index) => (
+                            <div key={index} className={`exit ${exit.toLowerCase()}`}></div>
+                        ))}
                     </div>
                 ))}
             </div>
