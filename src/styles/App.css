@@ -1,146 +1,114 @@
-.app {
+/* Main layout: Flexbox with three columns */
+.tabbed-layout {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center the content horizontally */
-  position: relative; /* Allow absolute positioning of children */
+  height: 100vh; /* Full screen height */
 }
 
-.direction-button {
-  width: 30px; /* Button width */
-  height: 30px; /* Button height */
-  font-size: 10px; /* Smaller font size */
-  margin: 1px; /* Remove margin */
-  padding: 0; /* Remove padding */
-  cursor: pointer; /* Pointer cursor for buttons */
-  display: flex; /* Use flexbox */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  background-color: #f0f0f0; /* Background color for buttons */
-  border: 0px solid #000; /* Add border to buttons */
-  box-sizing: border-box; /* Include border in width/height */
-}
-
-/* Special border management for adjacent buttons */
-.controls {
-  margin-top: 10px;
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  grid-template-rows: repeat(3, 1fr); /* 3 rows */
-  width: 90px; /* Set a fixed width for the control area */
-  align-items: center; /* Center items vertically within the grid */
-}
-
-
-.room-info {
-  margin-bottom: 15px;
-}
-
-.combat-log {
-  border-top: 1px solid #ddd;
-  padding-top: 10px;
-}
-.game-layout {
-  display: flex;
-  justify-content: space-between; /* Spreads the content horizontally */
-  align-items: flex-start; /* Aligns the content vertically */
-  padding: 20px;
-}
-
-.output-window {
-  width: 50vw; /* 2/3 of the screen width */
-  height: 30vh; /* Full height of the viewport */
-  border: 1px solid #ccc; /* Optional: Add border for visibility */
-  overflow-y: auto; /* Scrollable if the content overflows */
-  padding: 10px; /* Optional: Add padding inside the output window */
-  box-sizing: border-box; /* Ensure padding does not affect the width */
-}
-
-.minimap-container {
-  flex: 1; /* Minimap will take up less space compared to the output window */
-  border: 1px solid #ccc;
-  padding: 5px;
-}
-.combat-ticker{
-  margin:0;
-}
-.combat-log {
-  max-height: 300px; /* Limit the height of the combat log */
-  overflow-y: auto; /* Allow scrolling if content exceeds the height */
-  padding: 10px;
-  border: 1px solid #ccc; /* Optional border */
-  background-color: #f9f9f9; /* Light background */
-}
-
-.player-action {
-  color: blue; /* Color for player actions */
-}
-
-.monster-action {
-  color: red; /* Color for monster actions */
-}
-
-.death-message {
-  color: darkred; /* Color for death messages */
-  font-weight: bold; /* Make it bold for emphasis */
-}
-.combat-window {
-  height: 50vh; /* Adjust the height to fit your layout */
-  overflow-y: auto; /* Enable vertical scrolling */
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f9f9f9;
-}
-
-.combat-log-container {
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.combat-ticker {
-  font-size: 11px; /* Adjust the font size here */
-  line-height: 1.2; /* Adjust line height for better readability */
-  margin-bottom: 0px;
-}
-
-.centered{
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-.player-stats {
+/* Tabs section (1/5th of the screen) */
+.tabs {
+  width: 20%; /* 1/5th of the screen */
   background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 8px;
-  margin: 10px 0;
-}
-
-.player-stats ul {
-  list-style: none;
-  padding: 0;
-}
-
-.stat {
-  margin: 5px 0;
-}
-
-.stat button {
-  margin-left: 10px;
-}
-.minimap-container {
-  flex: 1;
-  border: 1px solid #ccc;
-  padding: 5px;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  position: fixed; /* Fixed to the left side */
+  left: 0;
   top: 0;
-  right: 0;
-  margin: 10px;
-  border: 2px solid black;
+  height: 100vh; /* Full screen height */
+  box-sizing: border-box; /* Include padding in width/height calculations */
+  z-index: 100; /* Ensure tabs are above the content area */
 }
 
+.tabs button {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  width: 100%; /* Full width of the tab container */
+}
+
+.tabs button.active {
+  background-color: #ccc; /* Highlight the active tab */
+}
+
+/* Middle content area: Center between tabs and minimap */
+.content-area {
+  margin-left: 20%; /* Start after the left tabs */
+  margin-right: 20%; /* Space for the right minimap */
+  padding: 20px;
+  background-color: #f9f9f9;
+  flex-grow: 1; /* Take up all available space between the tabs and minimap */
+  height: 100vh; /* Full height of the viewport */
+  overflow-y: auto; /* Scrollable content */
+  box-sizing: border-box; /* Include padding in width/height calculations */
+  z-index: 1; /* Ensure content appears behind the fixed tabs/minimap */
+}
+
+/* Right minimap section (1/5th of the screen) */
+.minimap-container {
+  width: 20%; /* Adjust as needed */
+  position: fixed; /* Fix to the right side */
+  right: 0;
+  top: 0;
+  height: 100vh; /* Full height of the viewport */
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-left: 1px solid #ccc;
+  box-sizing: border-box; /* Include padding in width/height calculations */
+  display: flex;
+  flex-direction: column; /* Stack minimap and controls vertically */
+  justify-content: start; /* Align items at the start */
+}
+
+.controls {
+  margin-top: 10px; /* Space above the controls */
+  text-align: center; /* Center text inside */
+  display: grid; /* Use grid for controls */
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+}
+
+.direction-button,
+.level-up-button {
+  padding: 12px; /* Add padding for a better click area */
+  margin: 1px; /* Space between buttons */
+  background-color: #8d8d8d; /* Green background color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  color: white; /* Text color */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.direction-button:hover,
+.level-up-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.direction-button:active,
+.level-up-button:active {
+  transform: translateY(1px); /* Slight dip on click */
+}
+
+.direction-button:disabled {
+  background-color: #ccc; /* Gray background for disabled buttons */
+  cursor: not-allowed; /* Not allowed cursor */
+}
+
+.level-up-button {
+  background-color: #2196F3; /* Blue background color for level up */
+}
+
+.level-up-button:hover {
+  background-color: #1e88e5; /* Darker blue on hover */
+}
+
+
+/* Ensure the Minimap grid is also styled correctly */
 .minimap-grid {
   display: grid;
-  grid-template-columns: repeat(9, 20px); /* Adjust to grid size */
+  grid-template-columns: repeat(9, 20px); /* Adjust as needed */
   grid-template-rows: repeat(9, 20px);
   gap: 2px; /* Space between rooms */
 }
@@ -161,60 +129,66 @@
 
 .minimap-room.player-room {
   background-color: blue; /* Color for player's current room */
-  opacity: .5;
+  opacity: 0.5; /* To make the player room slightly transparent */
 }
 
 .exit {
   width: 3px;
   height: 3px;
-  background-color: red; /* Exit marker color */
-  position: absolute;
+  background-color: rgb(76, 95, 71); /* Exit indicator color */
+  position: absolute; /* Position it relative to the room */
 }
 
-.exit.north {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+/* Example styles for directional exits */
+.exit.north { top: 0px; left: 50%; transform: translateX(-50%); }
+.exit.northeast { top: 0px; left: 18.5px; transform: translateX(-50%); }
+.exit.northwest { top: 0px; left: 2px; transform: translateX(-50%); }
+.exit.south { bottom: 0px; left: 50%; transform: translateX(-50%); }
+.exit.southeast { bottom: 0px; left: 18.5px; transform: translateX(-50%); }
+.exit.southwest { bottom: 0px; left: 2px; transform: translateX(-50%); }
+.exit.east { right: 0px; top: 50%; transform: translateY(-50%); }
+.exit.west { left: 0px; top: 50%; transform: translateY(-50%); }
+
+.combat-log {
+  font-size: 10px; /* Adjust this value as needed for smaller font size */
+  line-height: 1; /* Decrease line height to bring lines closer together */
+  padding: 10px; /* Adjust padding as needed */
+  margin: 0; /* Set margin to zero to reduce spacing outside */
+  background-color: #f9f9f9; /* Optional: background color for better visibility */
+  border: 1px solid #ccc; /* Optional: border for distinction */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  max-height: 500px; /* Optional: limit height to maintain layout */
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
-.exit.south {
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+.combat-ticker {
+  margin: 2px 0;
 }
 
-.exit.east {
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.playerHit {
+  color: green; /* Player hits monster */
 }
 
-.exit.west {
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.monsterHit {
+  color: red; /* Monster hits player */
 }
 
-.exit.northeast {
-  top: 0;
-  right: -5%;
-  transform: translateX(-50%);
+.miss {
+  color: gray; /* Misses */
 }
 
-.exit.northwest {
-  top: 0;
-  left: 8%;
-  transform: translateX(-50%);
+.experience {
+  color: rgb(194, 145, 55); /* Experience gain */
 }
 
-.exit.southeast {
-  bottom: 0;
-  right: -5%;
-  transform: translateX(-50%);
+.itemDrop {
+  color: blue; /* Item drops */
 }
 
-.exit.southwest {
-  bottom: 0;
-  left: 8%;
-  transform: translateX(-50%);
+.playerDeath {
+  color: darkred; /* Player death */
+}
+
+.monsterDeath {
+  color: rgb(0, 0, 0); /* Monster death */
 }

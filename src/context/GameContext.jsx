@@ -82,7 +82,7 @@ const GameProvider = ({ children }) => {
     };
     const spendPoints = (stat, points) => {
         setPlayerStats((prevStats) => {
-            const updatedStatValue = prevStats[stat] + points;
+            const updatedStatValue = prevStats[stat] + 1;
             let newHP = prevStats.hpMax;
             let newMP = prevStats.mpMax;
     
@@ -113,6 +113,10 @@ const GameProvider = ({ children }) => {
         setMonsters(updatedMonsters); // Update the state
     };
 
+    const [combatLog, setCombatLog] = useState([])
+    const updateCombatLog = (newLog) => {
+        setCombatLog(prevLog => [...prevLog, ...newLog]);
+    };
     return (
         <GameContext.Provider 
             value={{ 
@@ -127,7 +131,9 @@ const GameProvider = ({ children }) => {
                 setPlayerStats,
                 updateMonstersInRoom,
                 rest,
-                spendPoints // Provide function to update monsters
+                spendPoints, // Provide function to update monsters
+                combatLog,
+                updateCombatLog
             }}>
             {children}
         </GameContext.Provider>

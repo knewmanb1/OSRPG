@@ -6,9 +6,20 @@ const PlayerStats = () => {
 
     // Function to handle stat upgrades
     const handleUpgrade = (stat) => {
-        if (playerStats.pointsToSpend > 0) {
-            spendPoints(stat, 1); // Spend 1 point per click
+        const pointsSpent = playerStats[stat] || 0; // Track how many points have been spent on this stat
+        const currentCost = Math.floor(pointsSpent / 10) + 1; // Cost increases after every 10 points spent
+
+        if (playerStats.pointsToSpend >= currentCost) {
+            spendPoints(stat, currentCost); // Spend points based on current cost
+        } else {
+            console.log('Not enough points to spend on this stat');
         }
+    };
+
+    // Helper to calculate the cost of upgrading a stat
+    const getUpgradeCost = (stat) => {
+        const pointsSpent = playerStats[stat] || 0;
+        return Math.floor(pointsSpent / 10) + 1;
     };
 
     return (
@@ -21,34 +32,24 @@ const PlayerStats = () => {
                 <li>Mana: {playerStats.mp} / {playerStats.mpMax}</li>
                 <li>Points to Spend: {playerStats.pointsToSpend}</li>
             </ul>
-            
+
             {/* Display upgradeable stats */}
             <div className="upgrade-stats">
                 <h3>Upgrade Stats</h3>
-                <div className="stat">
-                    <span>Constitution: {playerStats.con}</span>
-                    <button onClick={() => handleUpgrade('con')} disabled={playerStats.pointsToSpend <= 0}>+1</button>
-                </div>
-                <div className="stat">
-                    <span>Strength: {playerStats.str}</span>
-                    <button onClick={() => handleUpgrade('str')} disabled={playerStats.pointsToSpend <= 0}>+1</button>
-                </div>
-                <div className="stat">
-                    <span>Dexterity: {playerStats.dex}</span>
-                    <button onClick={() => handleUpgrade('dex')} disabled={playerStats.pointsToSpend <= 0}>+1</button>
-                </div>
-                <div className="stat">
-                    <span>Intelligence: {playerStats.int}</span>
-                    <button onClick={() => handleUpgrade('int')} disabled={playerStats.pointsToSpend <= 0}>+1</button>
-                </div>
-                <div className="stat">
-                    <span>Wisdom: {playerStats.wis}</span>
-                    <button onClick={() => handleUpgrade('wis')} disabled={playerStats.pointsToSpend <= 0}>+1</button>
-                </div>
-                <div className="stat">
-                    <span>Perception: {playerStats.per}</span>
-                    <button onClick={() => handleUpgrade('per')} disabled={playerStats.pointsToSpend <= 0}>+1</button>
-                </div>
+                {['con', 'str', 'dex', 'int', 'wis', 'per'].map((stat) => {
+                    const upgradeCost = getUpgradeCost(stat);
+
+                    return (
+                        <div className="stat" key={stat}>
+                            <span>{stat.charAt(0).toUpperCase() + stat.slice(1)}: {playerStats[stat]}</span>
+                            {playerStats.pointsToSpend >= upgradeCost && (
+                                <button onClick={() => handleUpgrade(stat)}>
+                                    +1 ({upgradeCost})
+                                </button>
+                            )}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

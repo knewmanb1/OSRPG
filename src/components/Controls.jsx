@@ -3,7 +3,6 @@ import { useGameContext } from '../context/GameContext';
 
 const Controls = () => {
     const { move,rest, playerStats, setPlayerStats, currentRoom } = useGameContext();
-
     const handleMove = (direction) => {
         move(direction);
     };
@@ -38,7 +37,7 @@ const Controls = () => {
         <div>
 
         
-        <div className="controls" style={{ marginTop: '10px', textAlign: 'center', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <div className="controls">
             {/* First Row */}
             <button className="direction-button" onClick={() => handleMove('Northwest')}>NW</button>
             <button className="direction-button" onClick={() => handleMove('North')}>N</button>
@@ -54,7 +53,7 @@ const Controls = () => {
             {/* Fourth Row */}
             <button className="direction-button" onClick={() => handleMove('Up')}>Up</button>
             <button style={{ visibility: 'hidden' }}></button> {/* Center button is blank */}
-            <button className="direction-button" onClick={() => handleMove('Down')}>Down</button>
+            <button className="direction-button" onClick={() => handleMove('Down')}>Dn</button>
             
         </div>
         {/* Check if the player is in the Training Hall and has enough experience */}

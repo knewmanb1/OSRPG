@@ -32,7 +32,7 @@ const Minimap = () => {
     }
 
     return (
-        <div className="minimap-container">
+        <div className="minimap-container1">
             <h2>Minimap</h2>
             <div className="minimap-grid">
                 {roomsArray.map(({ x, y, room, exists, exits }) => (
