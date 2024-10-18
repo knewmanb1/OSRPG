@@ -4,7 +4,7 @@ import rooms from '../data/rooms'; // Adjust the import based on where your room
 import '../styles/App.css'; // Import your CSS file
 
 const Minimap = () => {
-    const { playerPos= { x: 0, y: 0, z: 0 } } = useGameContext(); // Get playerPosition from context
+    const { playerPos = { x: 0, y: 0, z: 0 } } = useGameContext(); // Get player position from context
     const { x: playerX, y: playerY, z: playerZ } = playerPos; // Destructure position
 
     // Define the size of the grid
@@ -26,6 +26,7 @@ const Minimap = () => {
                 y: startY + y,
                 room,
                 exists: room !== undefined, // Check if the room exists
+                discovered: room?.discovered || false, // Add discovered flag
                 exits: room?.exits || [] // Add exits for the room
             });
         }
@@ -35,13 +36,13 @@ const Minimap = () => {
         <div className="minimap-container1">
             <h2>Minimap</h2>
             <div className="minimap-grid">
-                {roomsArray.map(({ x, y, room, exists, exits }) => (
+                {roomsArray.map(({ x, y, room, exists, discovered, exits }) => (
                     <div
                         key={`${x},${y},${playerZ}`} // Use playerZ for key
-                        className={`minimap-room ${exists ? 'exists' : 'non-exists'} ${x === playerX && y === playerY ? 'player-room' : ''}`}
+                        className={`minimap-room ${exists ? 'exists' : 'non-exists'} ${discovered ? 'discovered' : 'notDiscovered'} ${x === playerX && y === playerY ? 'player-room' : ''}`}
                     >
                         {/* Optional: Display room exits */}
-                        {exists && exits.map((exit, index) => (
+                        {exists && discovered && exits.map((exit, index) => (
                             <div key={index} className={`exit ${exit.toLowerCase()}`}></div>
                         ))}
                     </div>

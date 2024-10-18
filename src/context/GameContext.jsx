@@ -32,21 +32,27 @@ const GameProvider = ({ children }) => {
     const updateRoom = (newPosition) => {
         const roomKey = `${newPosition.x},${newPosition.y},${newPosition.z}`;
         const newRoom = rooms[roomKey];
-
-        // Update the current room
-        setCurrentRoom(newRoom);
-
-        // Check if the room has existing monsters, otherwise spawn new ones
+    
+        // Update the current room and mark it as discovered
+        setCurrentRoom((prevRoom) => ({
+            ...prevRoom,
+            discovered: true, // Mark the room as discovered
+        }));
+    
+        if (!newRoom.discovered) {
+            newRoom.discovered = true; // Mark as discovered in the room data
+        }
+    
+        // Continue with existing monster logic
         if (newRoom.monsters && newRoom.monsters.length > 0) {
             setMonsters(newRoom.monsters); // Load existing monsters
         } else {
             const spawnedMonsters = spawnMonsters(roomKey);
             setMonsters(spawnedMonsters);
-
-            // Save the newly spawned monsters in the room object
-            newRoom.monsters = spawnedMonsters;
+            newRoom.monsters = spawnedMonsters; // Save new monsters in room object
         }
     };
+    
 
     // Function to handle player movement
     const move = (direction) => {

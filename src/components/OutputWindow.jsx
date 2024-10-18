@@ -6,7 +6,6 @@ import CombatWindow from "./CombatWindow";
 const OutputWindow = () => {
   const { currentRoom, monsters = [] } = useGameContext(); // Default to an empty array
   return (
-    <div>
     <div className="output-window">
       {currentRoom && (
         <div className="room-info">
@@ -30,8 +29,6 @@ const OutputWindow = () => {
           )}
         </div>
       )}
-    </div>
-    <CombatWindow />
     </div>
   );
 };

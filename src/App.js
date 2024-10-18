@@ -2,6 +2,7 @@ import React from 'react';
 import { GameProvider } from './context/GameContext';
 import Tabs from './components/Tabs';
 import useGameLoop from './utils/gameLoop';
+import CombatWindow from './components/CombatWindow';
 
 const App = () => {
   return (
@@ -11,7 +12,9 @@ const App = () => {
       
       <div className="game-layout">
         <Tabs />
+        <CombatWindow />
       </div>
+      
     </GameProvider>
   );
 };

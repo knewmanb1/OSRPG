@@ -38,7 +38,7 @@
   padding: 20px;
   background-color: #f9f9f9;
   flex-grow: 1; /* Take up all available space between the tabs and minimap */
-  height: 100vh; /* Full height of the viewport */
+  height: 50vh; /* Full height of the viewport */
   overflow-y: auto; /* Scrollable content */
   box-sizing: border-box; /* Include padding in width/height calculations */
   z-index: 1; /* Ensure content appears behind the fixed tabs/minimap */
@@ -149,20 +149,30 @@
 .exit.east { right: 0px; top: 50%; transform: translateY(-50%); }
 .exit.west { left: 0px; top: 50%; transform: translateY(-50%); }
 
-.combat-log {
-  font-size: 10px; /* Adjust this value as needed for smaller font size */
-  line-height: 1; /* Decrease line height to bring lines closer together */
-  padding: 10px; /* Adjust padding as needed */
-  margin: 0; /* Set margin to zero to reduce spacing outside */
-  background-color: #f9f9f9; /* Optional: background color for better visibility */
-  border: 1px solid #ccc; /* Optional: border for distinction */
-  overflow-y: auto; /* Allow scrolling if content overflows */
-  max-height: 500px; /* Optional: limit height to maintain layout */
-  box-sizing: border-box; /* Include padding in width calculations */
+.combat-log-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px; /* Adjust height as needed */
+  overflow-y: auto;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  z-index: 300; /* Higher than the tabs and content */
+  border-top: 2px solid #444;
+  box-sizing: border-box;
 }
 
+
 .combat-ticker {
-  margin: 2px 0;
+  margin: 5px 0;
+}
+
+.room-description-container {
+  padding: 10px;
+  background-color: #f0f0f0;
+  color: #333;
 }
 
 .playerHit {
@@ -191,4 +201,11 @@
 
 .monsterDeath {
   color: rgb(0, 0, 0); /* Monster death */
+}
+.game-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full height of the viewport */
+  position: relative; /* Ensure this is relative to contain absolute elements */
+  padding-bottom: 150px; /* Leave space for the combat log */
 }
